@@ -50,7 +50,10 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
+            
               "src/styles.css"
+          
             ],
             "scripts": []
           },
@@ -120,5 +123,8 @@
       }
     }
   
+  },
+  "cli": {
+    "analytics": "fb746924-a05c-47c4-b415-f4064f706cbe"
   }
 }
