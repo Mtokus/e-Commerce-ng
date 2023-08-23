@@ -10,9 +10,13 @@ app.use(cors());
 
 
 const authRouter=require ("./routers/auth.router");
+const categoryRouter=require ("./routers/category.router");
+
 
 
 app.use("/api/auth", authRouter);
+app.use ("/api/categories", categoryRouter);
+
 connection();
 
 const port= process.env.PORT || 5000;

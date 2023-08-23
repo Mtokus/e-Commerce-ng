@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SharedModule } from 'src/app/common/shared/shared.module';
-import { AuthService } from './services/auth.service';
-import { LoginModel } from './models/login.model';
+
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { LoginModel } from '../../models/login.model';
 
 @Component({
   selector: 'app-login',
