@@ -40,10 +40,19 @@ router.post("/update", async (req, res) => {
   try {
     const { _id, name } = req.body;
     const category = await Category.findOne({ _id: _id });
-    category.name = name;
-    await Category.findByIdAndUpdate(_id, category);
+    if (category.name != name) {
+      const checkName = await Category.findOne({ name: name });
+      if (checkName != null) {
+        res.status(403).json({
+          message: "Bu Kategori Daha Önce Eklendi",
+        });
+      } else {
+        category.name = name;
+        await Category.findByIdAndUpdate(_id, category);
 
-    res.json({ message: "Kategory Kaydı Başarıyla Güncellendi " });
+        res.json({ message: "Kategory Kaydı Başarıyla Güncellendi " });
+      }
+    }
   } catch (error) {
     res.stats(500).json({ message: error.message });
   }
