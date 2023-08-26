@@ -1,20 +1,5 @@
-<div class="card">
-  <div class="card-header">
-    <h2 style="float: left">Kategoriler</h2>
-    <nav aria-label="breadcrumb" style="float: right">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Ana sayfa</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Kategoriler</li>
-      </ol>
-    </nav>
-  </div>
-</div>
-
-<div class="card mt-2">
-  <div class="card-header">
-    <h4>Kategori Listesi</h4>
-  </div>
-  <div class="card-body">
+<app-blank title="kategoriler" sectionTitle="Kategori Listesi">
+  <div class="form-group">
     <button
       class="btn btn-outline-primary"
       data-bs-toggle="modal"
@@ -25,39 +10,44 @@
     <div class="col-md-4" style="float: right">
       <input
         type="search"
+        [(ngModel)]="search"
         class="form-control"
         placeholder="Aranacak değeri yazınız"
-      />
+      >
     </div>
-    <div class="form-group">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Kategori Adı</th>
-            <th>İşlem Adı</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let category of categories; let index = index">
+  </div>
+
+  <app-table [heads]='["#", "Kategori Adı", "İşlemler"]'>
+    <tr
+            *ngFor="
+              let category of categories | categoryPipe : search;
+              let index = index
+            "
+          >
             <td>{{ index + 1 }}</td>
             <td>{{ category.name }}</td>
             <td>
-              <button class="btn btn-outline-warning btn-sm" (click)="get(category)"
-              data-bs-toggle="modal"
-              data-bs-target="#updateModal" >
+              <button
+                class="btn btn-outline-warning btn-sm"
+                (click)="get(category)"
+                data-bs-toggle="modal"
+                data-bs-target="#updateModal"
+              >
                 <i class="fa fa-edit"></i>
               </button>
-              <button (click)="removeById()" class="btn btn-outline-danger btn-sm mx-1">
+              <button
+                (click)="removeById(category)"
+                class="btn btn-outline-danger btn-sm mx-1"
+              >
                 <i class="fa fa-trash"></i>
               </button>
             </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+  </app-table>
+  
+</app-blank>
+
+
 <!-- Ekleme Modal -->
 <div
   class="modal fade"
@@ -120,7 +110,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="updateModalLabel">Kategori Güncelleme</h1>
+        <h1 class="modal-title fs-5" id="updateModalLabel">
+          Kategori Güncelleme
+        </h1>
         <button
           type="button"
           id="updateModalCloseBtn"
@@ -129,14 +121,18 @@
           aria-label="Close"
         ></button>
       </div>
-      <form autocomplete="off" #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+      <form
+        autocomplete="off"
+        #updateForm="ngForm"
+        (ngSubmit)="update(updateForm)"
+      >
         <div class="modal-body">
           <div class="form-group">
             <label for="updateName">Kategori Adı</label>
             <input
               type="text"
               class="form-control"
-             [(ngModel)]="updateCategory.name"
+              [(ngModel)]="updateCategory.name"
               name="updateName"
               id="updateName"
               #updateName
@@ -153,10 +149,11 @@
           >
             Kapat
           </button>
-          <button type="submit" class="btn btn-outline-warning">Güncelle</button>
+          <button type="submit" class="btn btn-outline-warning">
+            Güncelle
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
-

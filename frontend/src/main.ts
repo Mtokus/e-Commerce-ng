@@ -7,7 +7,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app/router';
 import { ToastrModule } from 'ngx-toastr';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
+
+
+
 
 
 
@@ -18,8 +21,7 @@ bootstrapApplication(AppComponent, {
       BrowserModule,
       CommonModule,
       BrowserAnimationsModule,
-      SweetAlert2Module,
-      
+ 
       ToastrModule.forRoot({
         closeButton: true,
         progressBar: true,

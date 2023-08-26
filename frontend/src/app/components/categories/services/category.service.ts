@@ -26,7 +26,7 @@ export class CategoryService {
   removeById(_id: string, callBack: (res: MessageResponseModel) => void) {
     let model = { _id: _id };
     this._http.post<MessageResponseModel>(
-      '/categories/removeById',
+      'categories/removeById',
       model,
       (res) => callBack(res)
     );

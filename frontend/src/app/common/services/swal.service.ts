@@ -8,19 +8,25 @@ import Swal from 'sweetalert2';
 export class SwalService {
   constructor() {}
   callSwal(text: string, title: string, btnName: string, callBack: () => void) {
-    Swal.fire({
-      text:text,
-      title:title,
-      showConfirmButton: true,
-      confirmButtonText: btnName,
-      showCancelButton: true,
-      cancelButtonText: 'Vazgeç',
-
-      icon: 'question',
-    }).then((res) => {
-      if (res.isConfirmed) {
-        callBack();
-      }
-    });
+   Swal.fire({
+  title: title,
+  text: text,
+  icon: 'warning',
+  showConfirmButton:true,
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonText:"Vazgeç",
+  cancelButtonColor: '#d33',
+  confirmButtonText: btnName
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Silindi!',
+      'Kategori Silindi',
+      'success'
+    );
+    callBack();
+  }
+})
   }
 }
