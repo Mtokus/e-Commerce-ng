@@ -73,11 +73,12 @@ router.post("/", async (req, res) => {
   });
 });
 //Ürün Aktif/Pasif Durumunu Değiştir
-router.post ("changeActiveStatus", async (req,res)=>{
+router.post ("/changeActiveStatus", async (req,res)=>{
   response(res,async ()=>{
     const {_id}=req.body;
-    let product= await Product.findOne (_id);
-    product.isActive=!product.isActive;
+    let product= await Product.findById(_id);
+    product.isActive= !product.isActive;
+    console.log(product)
     await Product.findByIdAndUpdate(_id,product);
     res.json({message:"Ürünün durumu başarıyla değiştirildi!"})
   });

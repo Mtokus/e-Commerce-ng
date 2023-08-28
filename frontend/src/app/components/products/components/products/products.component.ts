@@ -7,6 +7,7 @@ import { SwalService } from 'src/app/common/services/swal.service';
 import { ToastrService } from 'ngx-toastr';
 import { SharedModule } from 'src/app/common/shared/shared.module';
 
+
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -52,5 +53,23 @@ export class ProductsComponent implements OnInit {
     if (this.request.search.length >= 3) {
       this.getAll(1);
     }
+  }
+  removeById(id:string){
+    this._swal.callSwal("Ürünü silmek istiyor musunuz", "Ürünü Sil", "Sil", ()=>{
+      let model ={_id:id};
+      this._product.removeById(model,res=>{
+        this._toastr.info(res.message);
+        this.getAll(this.request.pageNumber)
+      })
+    } )
+  }
+  changeProductStatus(id:string){
+    let model = {_id:id};
+    this._product.changeActiveStatus (model,res =>{
+      this._toastr.info(res.message);
+     
+    })
+
+
   }
 }

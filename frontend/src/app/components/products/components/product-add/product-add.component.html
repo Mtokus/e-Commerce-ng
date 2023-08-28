@@ -75,12 +75,12 @@
           (change)="getImages($event)"
           />
           <hr>
-          <div class="form-group mt-2">
+          <div class="form-group">
             <p>Seçilen Resimler</p>
-            <span (click)="removeImage(image.name, image.size, i)" 
-            *ngFor="let image of imageUrls let i = index" >
-                <img [src]="image.imageUrls" width="100" class="mx-1">
+            <span (click)="removeImage(image.name, image.size, i)" *ngFor="let image of imageUrls let i =index">
+              <img [src]="image.imageUrl" width="100" class="mx-1"> 
             </span>
+           
           </div>
           <div class="form-group mt-2">
             <button class="btn btn-primary w-100" >Kaydet</button>
