@@ -7,7 +7,7 @@ const upload = require("../services/file.servis");
 const response = require("../services/response.servis");
 
 // Ürün Ekleme
-router.post("/add", upload.array("image"), async (req, res) => {
+router.post("/add", upload.array("images"), async (req, res) => {
   response(res, async () => {
     const { name, stock, price, categories } = req.body;
     const productId = uuidv4();
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
       ],
     })
       .sort({ name: 1 })
-      .populate("categoies")
+      .populate("categories")
       .skip((pageNumber - 1).pageSize)
       .limit(pageSize);
     let totalPageCount = Math.ceil(productCount / pageSize);
@@ -91,7 +91,7 @@ router.post("/getById", async (req, res) => {
   });
 });
 //Ürünü Güncelle
-router.post("/update", upload.array(images), async (req, res) => {
+router.post("/update", upload.array("images"), async (req, res) => {
   response(res, async () => {
     const { _id, name, stock, price, categories } = req.body;
     let product = await Product.findById(_id);

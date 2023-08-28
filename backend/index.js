@@ -4,6 +4,7 @@ const cors = require("cors");
 const req = require("express/lib/request");
 const connection = require("./database/db");
 const router = require("./routers/auth.router");
+const path = require ("path");
 
 app.use(express.json());
 app.use(cors());
@@ -15,7 +16,7 @@ const productRouter = require("./routers/product.router");
 
 app.use("/api/auth", authRouter);
 app.use("/api/categories", categoryRouter);
-app.use("/api/product", productRouter);
+app.use("/api/products", productRouter);
 
 connection();
 

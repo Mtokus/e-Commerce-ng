@@ -12,7 +12,7 @@ export class ProductService {
   constructor(private _http: GenericHttpService) {}
 
   add(model: FormData, callBack: (res: MessageResponseModel) => void) {
-    this._http.post<MessageResponseModel>('products/add', model, (res) =>
+    this._http.post<MessageResponseModel>('products/add ', model, (res) =>
       callBack(res)
     );
   }
