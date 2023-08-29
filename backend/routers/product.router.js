@@ -78,7 +78,6 @@ router.post ("/changeActiveStatus", async (req,res)=>{
     const {_id}=req.body;
     let product= await Product.findById(_id);
     product.isActive= !product.isActive;
-    console.log(product)
     await Product.findByIdAndUpdate(_id,product);
     res.json({message:"Ürünün durumu başarıyla değiştirildi!"})
   });
@@ -96,9 +95,9 @@ router.post("/update", upload.array("images"), async (req, res) => {
   response(res, async () => {
     const { _id, name, stock, price, categories } = req.body;
     let product = await Product.findById(_id);
-    for (const image of product.imageUrls) {
-      fs.unlink(image.path), () => {};
-    }
+    // for (const image of product.imageUrls) {
+    //   fs.unlink(image.path), () => {};
+    // }
     let imageUrls;
     imageUrls = [...product.imageUrls, ...req.files];
     product = {

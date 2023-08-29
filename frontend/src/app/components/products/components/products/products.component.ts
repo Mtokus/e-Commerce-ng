@@ -6,6 +6,7 @@ import { ProductService } from '../../services/product.service';
 import { SwalService } from 'src/app/common/services/swal.service';
 import { ToastrService } from 'ngx-toastr';
 import { SharedModule } from 'src/app/common/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -67,6 +68,7 @@ export class ProductsComponent implements OnInit {
     let model = {_id:id};
     this._product.changeActiveStatus (model,res =>{
       this._toastr.info(res.message);
+      this.getAll (this.request.pageNumber)
      
     })
 
