@@ -73,13 +73,13 @@ router.post("/", async (req, res) => {
   });
 });
 //Ürün Aktif/Pasif Durumunu Değiştir
-router.post ("/changeActiveStatus", async (req,res)=>{
-  response(res,async ()=>{
-    const {_id}=req.body;
-    let product= await Product.findById(_id);
-    product.isActive= !product.isActive;
-    await Product.findByIdAndUpdate(_id,product);
-    res.json({message:"Ürünün durumu başarıyla değiştirildi!"})
+router.post("/changeActiveStatus", async (req, res) => {
+  response(res, async () => {
+    const { _id } = req.body;
+    let product = await Product.findById(_id);
+    product.isActive = !product.isActive;
+    await Product.findByIdAndUpdate(_id, product);
+    res.json({ message: "Ürünün durumu başarıyla değiştirildi!" });
   });
 });
 //Ürünü Id 'ye Göre Getir
@@ -114,22 +114,61 @@ router.post("/update", upload.array("images"), async (req, res) => {
   });
 });
 //Ürün Resmi Sil
-router.post("/removeImageByProductIdAndIndex",async (req,res)=>{
-  response(res,async()=>{
-    const {_id,index}= req.body;
+router.post("/removeImageByProductIdAndIndex", async (req, res) => {
+  response(res, async () => {
+    const { _id, index } = req.body;
 
-    let product=await Product.findById(_id);
-    if(product.imageUrls.length==1){
-      res.status(500).json ({message:"Ürünün son resmini silemezsiniz! Ürünün en az bir resmi bulunmak zorundadır!"})
-    }else {
-      let image=product.imageUrls[index];
-      product.imageUrls.splice(index,1);
-      await Product.findByIdAndUpdate(_id,product);
-      fs.unlink(image.path, ()=>{});
+    let product = await Product.findById(_id);
+    if (product.imageUrls.length == 1) {
+      res
+        .status(500)
+        .json({
+          message:
+            "Ürünün son resmini silemezsiniz! Ürünün en az bir resmi bulunmak zorundadır!",
+        });
+    } else {
+      let image = product.imageUrls[index];
+      product.imageUrls.splice(index, 1);
+      await Product.findByIdAndUpdate(_id, product);
+      fs.unlink(image.path, () => {});
       res.json({
-        message:"Ürün resmi başarıyla silindi!"
-      })
+        message: "Ürün resmi başarıyla silindi!",
+      });
     }
-  })
-})
-module.exports=router;
+  });
+});
+
+//Ana sayfa Ürün Listesi Getir
+router.post("/getAllForHomePage", async (req, res) => {
+  response(res, async () => {
+    const { pageNumber, pageSize, search, categoryId, priceFilter } = req.body;
+    let products;
+    if (priceFilter == "0") {
+      products = await Product.find({
+        isActive: true,
+        categories: { $regex: categoryId, $options: "i" },
+        $or: [
+          {
+            name: { $regex: search, $options: "i" },
+          },
+        ],
+      })
+        .sort({ name: 1 })
+        .populate("categories");
+    } else {
+      products = await Product.find({
+        isActive: true,
+        categories: { $regex: categoryId, $options: "i" },
+        $or: [
+          {
+            name: { $regex: search, $options: "i" },
+          },
+        ],
+      })
+        .sort({ price: priceFilter })
+        .populate("categories");
+    }
+    res.json (products);
+  });
+});
+module.exports = router;
