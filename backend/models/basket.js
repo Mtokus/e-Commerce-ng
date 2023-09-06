@@ -5,6 +5,7 @@ const basketSchema = new mongoose.Schema({
     price: Number,
     quantity:Number,
     userId:String,
+    
 });
 const Basket =mongoose.model("Basket",basketSchema)
 module.exports=Basket

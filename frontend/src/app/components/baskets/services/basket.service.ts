@@ -32,9 +32,10 @@ export class BasketService {
     this._http.post<MessageResponseModel>("baskets/add",model,res=>{
       this.getCount();
       callBack(res);
+      
     })
   }
-  remoById(model:any, callBack:(res:MessageResponseModel)=>void){
+  removeById(model:any, callBack:(res:MessageResponseModel)=>void){
     this._http.post<MessageResponseModel>("baskets/removeById", model,res=>{
       this.getCount();
       callBack(res);

@@ -32,10 +32,11 @@ router.post("/removeById", async (req, res) => {
   response(res, async () => {
     const { _id } = req.body;
     let basket = await Basket.findById(_id);
-    let product = await Basket.findById(productId);
-
-    await Product.findByIdAndUpdate(productId, product);
+    let product = await Product.findById(basket.productId);
+    product.stock += basket.quantity;
+    await Product.findByIdAndUpdate(basket.productId, product);
     await Basket.findByIdAndRemove(_id);
+    res.json ({message:"Ürün sepetten başarıyla silindi"})
   });
 });
 
@@ -60,7 +61,7 @@ router.post("/", async (req, res) => {
   });
 });
 //Sepetteki Ürün Sayısı
-router.post ("/getcount", async (req,res)=> {
+router.post ("/getCount", async (req,res)=> {
   response(res,async()=>{
     const {userId}=req.body;
     const count=await Basket.find({userId:userId}).count();

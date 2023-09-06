@@ -58,6 +58,10 @@ export const routes: Routes = [
             (c) => c.CategoriesComponent
           ),
       }, 
+      {
+        path:"baskets",
+        loadComponent:()=> import("./components/baskets/components/baskets/baskets.component").then (c=>c.BasketsComponent)
+      }
     ],
   },
 ];
