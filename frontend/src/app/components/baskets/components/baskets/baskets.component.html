@@ -6,7 +6,6 @@
         '#',
         'Ürün Resmi',
         'Ürün Adı',
-        
         'Adet',
         'Birim Fiyatı',
         'Toplam Tutar',
@@ -51,6 +50,11 @@
     </app-table>
       
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-3" style="border: 1px solid #ccc; pad: 10px;">
+      
+      <h1 class="alert alert-danger">Ödenecek Tutar: {{sum| trCurrency:'₺'}} </h1>
+      <button (click)="createOrder()" *ngIf="baskets.length>0" class="btn btn-success w-100"  >Ödeme Yap</button>
+
+    </div>
   </div>
 </app-blank>

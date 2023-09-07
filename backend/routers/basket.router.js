@@ -6,24 +6,24 @@ const { v4: uuidv4 } = require("uuid");
 const Product = require("../models/product");
 
 //Sepete Ekleme
-router.post("/add", async (req, res) => {
-  response(res, async () => {
-    const { userId, productId, price, quantity } = req.body;
+router.post("/add", async (req, res)=>{
+  response(res, async()=> {
+      const {userId, productId, price, quantity} = req.body;
 
-    let basket = new Basket();
-    basket._id = uuidv4();
-    basket.userId = userId;
-    basket.productId = productId;
-    basket.price = price;
-    basket.quantity = quantity;
+      let basket = new Basket();
+      basket._id = uuidv4();
+      basket.userId = userId;
+      basket.productId = productId;
+      basket.price = price;
+      basket.quantity = quantity;
 
-    await basket.save();
+      await basket.save();
 
-    let product = await Product.findById(productId);
-    product.stock -= quantity;
-    await Product.findByIdAndUpdate(productId, product);
+      let product = await Product.findById(productId);
+      product.stock -= quantity;
+      await Product.findByIdAndUpdate(productId, product);
 
-    res.json({ message: "Ürün Sepete Eklendi!" });
+      res.json({message: "Ürün başarıyla sepete eklendi!"});
   });
 });
 
@@ -50,12 +50,12 @@ router.post("/", async (req, res) => {
       },
       {
         $lookup: {
-          from: " products",
+          from: "products",
           localField: "productId",
           foreignField: "_id",
           as: "products",
-        },
-      },
+        }
+      }
     ]);
     res.json(baskets);
   });

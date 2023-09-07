@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
     user.isAdmin = false;
     const checkUserEmail = await User.findOne({ email: user.email });
     if (checkUserEmail != null) {
-      res.status(403).json({ message: "BU email daha önce kullanılmış" });
+      res.status(403).json({ message: "Bu email daha önce kullanılmış" });
     } else {
       await user.save();
       const token = jwt.sign({}, secretKey, options);

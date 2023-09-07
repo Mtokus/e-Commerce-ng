@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BasketModel } from '../../models/basket.model';
 import { SharedModule } from 'src/app/common/shared/shared.module';
 import { BasketService } from '../../services/basket.service';
 import { ToastrService } from 'ngx-toastr';
 import { SwalService } from 'src/app/common/services/swal.service';
+import { OrderService } from 'src/app/components/orders/services/order.service';
 
 @Component({
   selector: 'app-baskets',
@@ -19,7 +19,8 @@ export class BasketsComponent implements OnInit {
   constructor(
     private _basket: BasketService,
     private _toastr: ToastrService,
-    private _swal: SwalService
+    private _swal: SwalService,
+    private _order:OrderService
   ) {}
   ngOnInit(): void {
     this.getAll();
@@ -48,7 +49,15 @@ export class BasketsComponent implements OnInit {
           this._toastr.info(res.message);
           this.getAll();
         });
-      }
-    );
-  }
+      });
+    }
+    createOrder(){
+      this._swal.callSwal("Ürünleri almak ister misiniz?", "Ürünleri Al","Ödeme Yap",()=>{
+        this._order.create(res=>{
+          this._toastr.success(res.message);
+          this.getAll();
+        })
+      })
+    }
+
 }

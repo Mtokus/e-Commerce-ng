@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
-  @Input() heads:string []=[]
+  @Input() heads:string []=[];
 
 }
