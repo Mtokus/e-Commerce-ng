@@ -52,7 +52,7 @@
     </div>
     <div class="col-md-3" style="border: 1px solid #ccc; pad: 10px;">
       
-      <h1 class="alert alert-danger">Ödenecek Tutar: {{sum| trCurrency:'₺'}} </h1>
+      <h2 class="alert alert-danger">Toplam: {{sum| trCurrency:'₺'}} </h2>
       <button (click)="createOrder()" *ngIf="baskets.length>0" class="btn btn-success w-100"  >Ödeme Yap</button>
 
     </div>

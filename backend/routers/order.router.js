@@ -42,7 +42,7 @@ router.post ("/", async (req,res)=> {
                   as: "products",
                 }
               }
-        ]).order ({createdDate: -1});
+        ]).sort ({createdDate: -1});
         res.json(orders);
     })
 })
