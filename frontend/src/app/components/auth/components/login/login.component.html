@@ -1,57 +1,80 @@
-<div class="d-flex justify-content-center" style="margin-top: 25px">
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header">
-        <h1 class="text-center">Giriş Sayfası</h1>
-      </div>
-      <div class="card-body">
-        <form
-          #loginForm="ngForm"
-          (ngSubmit)="login(loginForm)"
-          autocomplete="off"
-        >
-          <div class="form-group">
-            <label for="email">Mail Adresi</label>
-
-            <input
-              class="form-control"
-              type="email"
-              ngModel
-              name="email"
-              id="email"
-              required
-              email
-              #email
-              [appValid]="email.validity.valid"
-            />
-            <div class="invalid-feedback">Geçerli bir mail adresi giriniz</div>
-          </div>
-          <div class="form-group mt-2">
-            <label for="password">Şifre</label>
-            <input
-              class="form-control"
-              type="password"
-              ngModel
-              name="password"
-              id="password"
-              #password
-              required
-              [appValid]="password.validity.valid"
-             
-            />
-          </div>
-          <div class="invalid-feedback">Şifre alanı boş olamaz</div>
-          <div class="form-group mt2">
-            <button
-              [disabled]="!loginForm.valid"
-              class="btn btn-outline-primary w-100"
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem">
+          <div class="card-body p-5 text-center">
+            <form
+              #loginForm="ngForm"
+              (ngSubmit)="login(loginForm)"
+              autocomplete="off"
             >
-              Giriş yap
-            </button>
-            <a routerLink="/register" style="float: right">Kayıt ol</a>
+              <div class="mb-md-5 mt-md-4 pb-5">
+                <h2 class="fw-bold mb-2 text-uppercase">Giriş</h2>
+                <p class="text-white-50 mb-5">
+                  Lütfen e-mail ve şifrenizi giriniz!
+                </p>
+
+                <div class="form-outline form-white mb-4">
+                  <input
+                    class="form-control"
+                    type="email"
+                    ngModel
+                    name="email"
+                    id="email"
+                    required
+                    email
+                    #email
+                    [appValid]="email.validity.valid"
+                  />
+                  <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                  <input
+                    class="form-control"
+                    type="password"
+                    ngModel
+                    name="password"
+                    id="password"
+                    #password
+                    required
+                    [appValid]="password.validity.valid"
+                  />
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+
+
+                <div class="form-group">
+                  <button class="btn btn-outline-light btn-lg px-5" [disabled]="!loginForm.valid">Login</button>
+                </div>
+
+                <div
+                  class="d-flex justify-content-center text-center mt-4 pt-1"
+                >
+                  <a href="#!" class="text-white"
+                    ><i class="fab fa-facebook-f fa-lg"></i
+                  ></a>
+                  <a href="#!" class="text-white"
+                    ><i class="fab fa-twitter fa-lg mx-4 px-2"></i
+                  ></a>
+                  <a href="#!" class="text-white"
+                    ><i class="fab fa-google fa-lg"></i
+                  ></a>
+                </div>
+              </div>
+
+              <div>
+                <p class="mb-0">
+                  Don't have an account?
+                  <a routerLink="/register" style="float: right">Kayıt ol</a>
+                </p>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
